@@ -1,0 +1,85 @@
+（1）java基础数据类型转换方法有哪些？
+答：1，低级变量直接转制成高级变量；2，高级变量强制转换成低级变量，但值会失去精度
+（2）题目1的转换方式适用与包装类吗？
+答：不可以，会产生编译错误。对象之间的类型转换只能存在于子类与父类之间。
+（3）start()方法的调用后，马上执行run()中的代码吗？
+答：不是，由操作系统决定什么时候执行。
+（4）Thread和Runnable的区别
+答：Runnable可以实现资源共享，Thread不行
+（5）线程的5种状态
+答：新建状态（New），就绪状态（Runnable），运行状态（Running），阻塞状态（Blocked），死亡状态（Dead）
+（6）解释下面有关线程的方法start(),setPriority(),sleep(),wait(),yield(),join(),notify(),interrupt()
+答：start()，使线程进入就绪状态（Runnable）；
+setPriority()，设置线程优先级；
+sleep(long millis): 在指定的毫秒数内让当前正在执行的线程休眠（暂停执行）；
+wait();使当前线程等待，放入等待池，直到调用notify()方法；
+yield()线程让步，暂停当前线程；
+join()指等待t线程终止后再终止主线程；
+interrupt()暴力中断线程；
+（7）遍历Map的四种方法
+答：1：keySet()，2：Iterator+entrySet()，3：for+Map.Entry（效率最快）4：Map.values()只能遍历值
+（8）HashMap和TreeMap,LinkedHashMap的区别
+答：HashMap:底层是哈希表数据结构。线程不同步。
+TreeMap:底层是二叉树数据结构，线程不同步，可用于给Map集合中的键进行排序。
+LinkedHashMap:底层使用哈希表与双向链表来保存所有元素的插入顺序。
+（9）ConcurrentModificationException是在什么情况下抛出的，如何避免
+答：遍历list时，list中的元素改变时引起的并发异常。使用listIterator可以增，删，改元素，因为它有索引。
+（10）说说ArrayList，LinkedList,Vector特点
+答： ArrayList：底层的数据结构使用的是数组结构，查询快，修改慢，线程不安全
+LinkedList：底层的数据结构是链表结构，查询较慢，增删较快，线程不安全
+Vector：底层是数组数据结构， 线程安全，无论查询还是增删都很慢，被ArrayList替代了
+（11）Vector有迭代器吗？如何遍历它？
+答：没有，可以通过Enumeration 和for循环语句
+（12）LinkedList特有的方法有哪些？
+答：addFirst();在头部添加元素      
+addLast();在尾部添加元素
+getFirst(); getLast(); 获取元素但不删除元素。如果集合中没有元素，会出现NoSuchElementException
+removeFirst();   removeLast(); 获取元素但是删除元素。如果集合中没有元素，会出现NoSuchElementException
+在JDK1.6出现了替代方法
+offerFirst(); offerLast();
+peekFirst(); peekLast(); 获取元素，但是元素不被删除。如果集合中没有元素，会返回null
+pollFirst(); pollLast(); 获取元素，但是元素被删除。如果集合中没有元素，会返回null
+（13）list的add与addall方法区别
+答：add添加一个实例（嵌套了一个list）,用于添加单个元素。addall联合两个List。
+（14）java set接口有哪些 实现类
+答：HashSet,LinkedHashSet,TreeSet
+（15）如何声明一个二维数组
+答：long[][] numfive=new long[5][];double[][] numsix={{1.111D,2.222D,3.333D},{4.444D,5.555D,6.666D}}；
+（16）JAVA输出入流分哪两种类型？它们有什么区别？
+答：字符流（Reader,Writer）,字节流（InputStream,OutputStream）；字符流根据字符集，每次读取一个字符。字节流每次读取一个字节（二进制）。
+（17）BufferedReader和InputStreamReader有什么不同和他们的特点。
+答：BufferedReader可以创建一个字符流缓存，它提供readline方法提高读取效率。InputStreamReader是字节流到字符流之间的桥梁，它根据字符集将读取的字节转换成相应的字符。一般在 BufferedReader 内包装 InputStreamReader，可以提高效率。代码如下：BufferedReader in
+= new BufferedReader(new InputStreamReader(System.in));
+（18）字符流和字节流的主要区别
+答：字节流处理图片，声音，视频等数据，字符流处理文本。
+（19）怎样在读取文件时指定字符集
+答：用InputStreamReader代替FileReader，InputStreamReader isr=new InputStreamReader(new FileInputStream(fileName),"UTF-8");这样读取文件就会直接用UTF-8解码，不用再出做编码转换。
+（20）解释下面有关IO流的类
+答：InputStream 输入流的抽象类，OutputStream输流的抽象类
+DataInputStream 标准数据类型输入流；DataOutputStream 标准数据类型输出流
+ByteArrayInputStream，从字节数组读取的输入流； ByteArrayOutputStream 写入字节数组的输出流
+FileInputStream，从文件读入的输入流；  FileOutputStream，写入文件的输出流
+PrintStream 包含最常见的Print（）和Println（）的输出流
+SequenceInputStream，将n个输入流联合起来，一个接一个按一定顺序读取
+BufferInputStream ，缓冲输入流 ；BufferOutputStream ，缓冲输出流
+InputStreamReader,是字节流通向字符流的桥梁，它使用指定的 charset 读取字节并将其解码为字符。
+FilterInputStream，FilterOutputStream简单地封装InputStream和OutputStream的功能，实现装饰者模式
+（21）java.io包中的字节流中的类关系有用到哪种设计模式
+答：装饰者模式
+（22）java.io.PrintWriter 中 write() 与 print() 的区别
+答：print方法可以将各种类型的数据转换成字符串的形式输出。重载的write方法只能输出字符、字符数组、字符串等与字符相关的数据。
+（23）java.io.PrintStream，java.io.PrintWriter会抛出IOException异常吗？
+答：永远不会
+（24）PrintStream 和 PrintWriter的功能有什么不同
+答：PrintStream 打印字节数据（按数据类型）PrintWriter打印字符数据（字符类型）
+（25）java.io.BufferedInputStream有readLine方法吗？
+答：没有
+（26）printWriter.write(1+1)会输出什么
+
+（27）
+时间日期
+字符串
+XML
+JDBC
+
+

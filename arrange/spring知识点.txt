@@ -1,0 +1,2 @@
+@Autowired 注入接口
+@Qualifier 注入多实现的接口，指定实现类
