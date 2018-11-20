@@ -1,2 +1,4 @@
 @Autowired 注入接口
 @Qualifier 注入多实现的接口，指定实现类
+@ModelAttribute注释方法
+ 被@ModelAttribute注释的方法会在此controller每个方法执行前被执行，因此对于一个controller映射多个URL的用法来说，要谨慎使用。

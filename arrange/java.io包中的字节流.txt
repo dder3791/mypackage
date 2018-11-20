@@ -1,0 +1,39 @@
+java.io包中的字节流（下）—— FilterInputStream和FilterOutputStream
+接着上篇文章，本篇继续说java.io包中的字节流。按照前篇文章所说，java.io包中的字节流中的类关系有用到GoF《设计模式》中的装饰者模式，而这正体现在FilterInputStream和FilterOutputStream和它的子类上，我们这篇就来看一看。
+0. FilterInputStream和FilterOutputStream
+首先，这两个都分别是InputStream和OutputStream的子类。而且，FilterInputStream和FilterOutputStream是具体的子类，实现了InputStream和OutputStream这两个抽象类中为给出实现的方法。
+但是，FilterInputStream和FilterOutputStream仅仅是“装饰者模式”封装的开始，它们在各个方法中的实现都是最基本的实现，都是基于构造方法中传入参数封装的InputStream和OutputStream的原始对象。
+比如，在FilterInputStream类中，封装了这样一个属性：
+1 protected volatile InputStream in;
+而对应的构造方法是：
+123 protected FilterInputStream(InputStream in) {    this.in = in;}
+read()方法的实现则为：
+123 public int read() throws IOException {    return in.read();}
+其它方法的实现，以及FilterOutputStream也都是同理类似的。
+我们注意到FilterInputStream和FilterOutputStream并没给出其它额外的功能实现，只是做了一层简单地封装。那么实现额外功能的实际是FilterInputStream和FilterOutputStream的各个子类。
+1. BufferedInputStream/BufferedOutputStream
+先说说这个最简单的一对，BufferedInputStream和BufferedOutputStream。顾名思义，Buffered就是缓冲了的。在BufferedInputStream和BufferedOutputStream中，都额外实现了byte数组做buffer。
+我们知道在父类FilterInputStream和FilterOutputStream类中，已经在构造方法时封装了原始的InputStream或者OutputStream对象。
+在我们使用BufferedInputStream和BufferedOutputStream来进行read()和write()调用的时候，并不一定直接对封装的InputStream或者OutputStream对象进行操作，而是要经过缓冲处理。
+在BufferedInputStream的read()中，实际上是一次读取了多个字节到缓冲数组，而非一次只读取一个。后续的read()操作可以直接从数组中获取字节，而不必再次调用封装的InputStream对象的read()操作。这样做其实在一定情况下可以减少底层的read调用次数，降低成本开销，提高了效率。
+在BufferedOutputStream中也是一样，它的write()会先把数据写到缓冲数组中，直到数据达到了某个特定的限额，再调用write()的时候回真正调用到封装的OutputStream对象的write()方法。
+2. DataInputStream/DataOutputStream
+这也是比较重要的一对Filter实现。那么说起功能，实际上就不得不提到他们除了extends FilterInputStream/FilterOutputStream外，还额外实现了DataInput和DataOutput接口。
+我们可以先来看下DataInput和DataOutput这两个interface。
+
+DataInput接口的outline
+再看DataOutput：
+
+DataOutput接口的outline
+而DataInputStream/DataOutputStream这一对实际上所做的也就是这两个接口所定义的方法。再DataInputStream/DataOutputStream中，这些方法做了拼接和拆分字节的工作。通过这些方法，我们可以方便的读取、写出各种我们实际所面对的类型的数据，而不必具体去在字节层面上做细节操作。
+3. PrintStream
+这个类不成对，只有这样一个OutputStream。看起名字中的Print，我们会想到什么？println()方法和print()方法。实际上，包括java.lang包中的System.out和System.error，使用的都是PrintStream类对象。
+从使用层面来看，这个类主要是提供了丰富的print()和println()的各类参数重载方法。对各个类型的输出，包括换行处理等都集成在内。还有format()方法，帮我们做到了类似C语言中printf()函数的效果。
+而从实现上来看，这些print()和println()最终都调用了各类write()方法。在这些write()方法中，实际上使用到了类中封装的这两个属性。
+12 private BufferedWriter textOut;private OutputStreamWriter charOut;
+他们都是Writer的子类，是字符流处理类，有编码解码机制，我们会在后续文章中详细说明。
+4. PushbackInputStream
+此类增加了“回退（push back）”功能。在读完一部分数据之后，可以“回退”到之前读过的某个“位置”，并重新设置这些数据。
+在实现上，类似于BufferedInputStream，在PushbackInputStream增加了缓冲数组，回退时调整数组的下标索引，并边回退边重置数据。
+5. LineNumberInputStream
+这个主要是方便读入时的行号处理，但已经被@Deprecated了，就不多说了。
