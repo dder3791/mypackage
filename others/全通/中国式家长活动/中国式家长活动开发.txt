@@ -1,0 +1,85 @@
+现在代码都在campaign分支上
+http://127.0.0.1:8080/summertrain/playGame/index
+
+ssh://git@112.35.1.147:9999/cloud3/summertrain
+
+
+
+
+去赚钱
+
+每日剩余赚钱机会
+
+做任务（任务id）
+分享
+
+任务分类 （次数来源）
+
+COLL
+SHARE
+JOB
+ENG
+LOGIN
+
+getmakemoneychance
+
+登录
+http://localhost:8080/summertrain/
+13942000005  111111aaa
+开发测试页
+http://localhost:8080/summertrain/pages/ajaxtest.jsp
+http://localhost:8080/summertrain/gamesource/toajaxtestpage
+
+首页
+http://127.0.0.1:8080/summertrain/campain/index
+文件位置
+
+/pages/parentswork/gameIndex.jsp
+
+
+http://localhost:8080/summertrain/gamesource/domession?src=LOGIN&deviceId=e27654c5760f51155aaf16566d91222c
+http://localhost:8080/summertrain/gamesource/getmakemoneychance
+http://localhost:8080/summertrain/gamesource/tomakemoney?goldNum=20
+
+
+与前端联调测试接口文档
+1，做任务
+ajax 请求地址：请求地址：请求地址：请求地址：请求地址：请求地址：
+http://localhost:8080/summertrain/gamesource/domession
+参数：
+src
+触发条件：
+1，用户进入活动主页
+2，用户单击任务列表中的按钮
+3，用户单击分享链接
+参数src的的值：
+用户进入活动主页传 LOGIN 
+用户单击任务”帮娃选大学“按钮传 COLL
+用户单击任务”带娃学英语“按钮传 ENG
+用户单击任务”陪娃写作业“按钮传 JOB
+用户单击分享链接传 SHARE
+示例：
+http://localhost:8080/summertrain/gamesource/domession?src=ENG
+
+2，显示剩余游戏次数
+ajax 请求地址：
+http://localhost:8080/summertrain/gamesource/getmakemoneychance
+触发条件：
+1，用户进入活动主页
+参数：
+无
+
+3，去赚钱
+ajax 请求地址：
+http://localhost:8080/summertrain/gamesource/tomakemoney?goldNum=20
+1，用户进入活动主页单击去赚钱按钮
+触发条件：
+参数：goldNum
+金币数量
+
+1158
+用两个质子锁死全人类的科学
+猎人232-6
+画手歌者
+
+
