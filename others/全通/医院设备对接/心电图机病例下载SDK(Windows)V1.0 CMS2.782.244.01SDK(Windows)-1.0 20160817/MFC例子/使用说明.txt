@@ -1,0 +1,9 @@
+1.将Sync_CaseDownloadDll.h和Sync_CaseDownload.dll文件复制到工程中；
+2.将Sync_CaseDownloadDll.h加入工程；
+3.在需要创建下载线程的文件中包含Sync_CaseDownloadDll.h文件。
+
+动态库的具体使用方法请参见“DLLTest”工程中的CDLLTestView类。
+
+DLLTest工程是使用VC++ 6.0创建的MFC单文档视图工程，窗口创建后会立即开启下载线程，关闭窗口可以终止下载线程。
+
+注意：由于本动态库会自动删除心电图机中的病例，所以请不要在调用本动态库时回顾心电图机上的历史病例。

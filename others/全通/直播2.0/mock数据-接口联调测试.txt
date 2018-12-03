@@ -1,0 +1,23 @@
+
+http://112.35.7.169:9010/livemanage/manage/lessonInfo/create
+
+{
+    "topicName": "英语一周通",
+    "gradeId": 234,
+    "grade": "一年级",
+    "liveProvinceCode": 4400,
+    "price": 45.5,
+    "autoPutoffTime": "2018-12-1",
+    "startClassTime": "2018-12-5",
+    "subjectId": 3260,
+    "subjectName": "英语",
+    "supplier": "黄小明",
+    "signupEndTime": "2018-12-5",
+    "clientPic": "http://www.pic.com/p/1.jpg",
+    "topicDesc": "英语一周通 desc描述",
+    "studyContent": "英语一周通内容",
+    "studyTarget": "英语一周通学习目标",
+    "classGroup": "英语学习小组",
+    "productSuperiority": "本产品是英语学习系统课程",
+    "orderDesc": "点击订购按钮完成订购"
+}
