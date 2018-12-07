@@ -23,13 +23,21 @@ git pull
 git checkout --  file
 git checkout -- *.java
 git checkout -- abc.java
+从缓存中撤销
+git reset HEAD filepathname
 
 解决冲突
 git reset --hard FETCH_HEAD
 
 操作顺序
 git clone ssh://git@112.35.1.147:9999/cloud3/summertrain
-进入 summertrain 目录
 git checkout campaign
 git pull
+git branch 查看分支
+git status
+git commit
+git push
+git checkout --  file 放弃更改
+git reset HEAD file 缓存中撤销
+
 
